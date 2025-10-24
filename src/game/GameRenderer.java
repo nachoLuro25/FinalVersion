@@ -41,35 +41,31 @@ public class GameRenderer {
     public void loadImages(Player player1, Player player2) {
         try {
             String path1 = player1.getColorType().getImagePath();
-            if (path1.startsWith("/")) path1 = path1.substring(1);
-            java.net.URL url1 = getClass().getClassLoader().getResource(path1);
-
             String path2 = player2.getColorType().getImagePath();
-            if (path2.startsWith("/")) path2 = path2.substring(1);
+
+            // Intentar cargar desde resources
+            java.net.URL url1 = getClass().getClassLoader().getResource(path1);
             java.net.URL url2 = getClass().getClassLoader().getResource(path2);
 
             if (url1 != null && url2 != null) {
                 imgPlayer1 = new ImageIcon(url1).getImage();
                 imgPlayer2 = new ImageIcon(url2).getImage();
             } else {
-                System.out.println("ERROR: No se encontraron las imágenes de las motos");
-                System.out.println("Path1: " + path1 + " -> " + url1);
-                System.out.println("Path2: " + path2 + " -> " + url2);
-                throw new Exception("Imágenes no encontradas");
+                // Fallback: cargar desde ruta directa
+                imgPlayer1 = new ImageIcon(path1).getImage();
+                imgPlayer2 = new ImageIcon(path2).getImage();
             }
+
+            System.out.println("✅ Imágenes de jugadores cargadas correctamente");
 
         } catch (Exception e) {
             System.out.println("Error cargando imágenes: " + e.getMessage());
-            // Fallback a imágenes por defecto
+            // Fallback final a imágenes por defecto
             try {
-                java.net.URL urlRed = getClass().getClassLoader().getResource("assets/Red.png");
-                java.net.URL urlBlue = getClass().getClassLoader().getResource("assets/Blue.png");
-                if (urlRed != null && urlBlue != null) {
-                    imgPlayer1 = new ImageIcon(urlRed).getImage();
-                    imgPlayer2 = new ImageIcon(urlBlue).getImage();
-                }
+                imgPlayer1 = new ImageIcon("assets/Red.png").getImage();
+                imgPlayer2 = new ImageIcon("assets/Blue.png").getImage();
             } catch (Exception e2) {
-                System.out.println("Error cargando imágenes de fallback: " + e2.getMessage());
+                System.out.println("Error en fallback: " + e2.getMessage());
             }
         }
     }

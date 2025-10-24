@@ -137,7 +137,7 @@ public class VentanaSeleccion extends JFrame {
     private JButton crearBotonColor(ColorType colorType, JLabel labelSeleccion, boolean esJugador1) {
         JButton btn;
         try {
-            ImageIcon icon = new ImageIcon(getClass().getResource(colorType.getProfilePath()));
+            ImageIcon icon = new ImageIcon(colorType.getProfilePath());
             Image img = icon.getImage().getScaledInstance(240, 220, Image.SCALE_SMOOTH);
             btn = new JButton(new ImageIcon(img));
         } catch (Exception e) {

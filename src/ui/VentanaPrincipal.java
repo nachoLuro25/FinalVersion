@@ -33,7 +33,7 @@ public class VentanaPrincipal extends JFrame {
 
         // Cargar fondo
         try {
-            fondoMenu = new ImageIcon(getClass().getResource("/assets/fondoMenu.png")).getImage();
+            fondoMenu = new ImageIcon("assets/fondoMenu.png").getImage();
         } catch (Exception e) {
             System.out.println("Error cargando fondo: " + e.getMessage());
         }

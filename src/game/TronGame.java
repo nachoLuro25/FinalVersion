@@ -145,7 +145,6 @@ public class TronGame extends JPanel implements ActionListener, KeyListener {
     private void endGame(String winnerName) {
         running = false;
         winner = winnerName;
-        audioManager.reproducirEfecto("derrota");
         mostrarMenuFinJuego();
     }
 

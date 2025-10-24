@@ -19,7 +19,7 @@ public class GhostMode extends Ability {
      * Duración: 125 frames (≈ 5 segundos a 25 FPS)
      */
     public GhostMode() {
-        super("INVISIBILIDAD", 125, "invisibilidad");
+        super("INVISIBILIDAD", 125, "desaparecer");
     }
 
     /**

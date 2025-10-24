@@ -26,7 +26,19 @@ public class UIComponents {
         JButton btn = new JButton();
 
         try {
-            ImageIcon icon = new ImageIcon(UIComponents.class.getResource(rutaImagen));
+            ImageIcon icon = null;
+
+            // Intentar cargar desde resources
+            java.net.URL url = UIComponents.class.getClassLoader().getResource(rutaImagen.startsWith("/") ? rutaImagen.substring(1) : rutaImagen);
+
+            if (url != null) {
+                icon = new ImageIcon(url);
+            } else {
+                // Fallback: cargar desde ruta directa
+                String path = rutaImagen.startsWith("/") ? rutaImagen.substring(1) : rutaImagen;
+                icon = new ImageIcon(path);
+            }
+
             Image img = icon.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
             ImageIcon iconNormal = new ImageIcon(img);
 
@@ -55,7 +67,10 @@ public class UIComponents {
                 }
             });
 
+            System.out.println("✅ Botón cargado: " + rutaImagen);
+
         } catch (Exception e) {
+            System.err.println("❌ Error cargando botón " + rutaImagen + ": " + e.getMessage());
             btn.setText("BOTÓN");
         }
 
